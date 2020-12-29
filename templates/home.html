@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+    {% block breadcrumb %}
+          <li class="breadcrumb-item active">Hear Clear</li>
+    {% endblock %}
+
+    {% block content %}
+    <div class="mb-4">
+        <a href="/HearClear/aboutme" class="btn btn-outline-primary">About Me</a>
+        <a href="/HearClear/comments" class="btn btn-outline-primary">Comments</a>
+    </div>
+
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th> Name of Songs </th>
+                <th> Type of Songs </th>
+            <tr>
+        <thead>
+        
+        <tbody>
+            {% for page in pages %}
+                <tr>
+                    <td>
+                        <a href="{% url 'aboutme' % page.pk}">{{page.name}} </a>
+                        <small class="text-muted d-block">{{page.description}}</small>
+                    </td>
+                    <td>mp3</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
