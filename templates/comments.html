@@ -8,3 +8,18 @@
   <li class="breadcrumb-item"><a href="{% url 'home'%}">Hear Clear</a></li>
   <li class="breadcrumb-item active">Comments</li>
 {% endblock %}
+
+{% block content %}
+
+<form>
+
+</form>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Marie</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="How to upload a song?">
+    </div>
+
+    <div class="mb-4">
+        <a href="comments/reply" class="btn btn-success" role="button">Reply</a>
+    </div>
+{% endblock %}

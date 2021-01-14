@@ -7,6 +7,7 @@
 
     {% block content %}
     <div class="mb-4">
+        <a href="/HearClear/upload" class="btn btn-outline-primary">Upload</a>
         <a href="/HearClear/aboutme" class="btn btn-outline-primary">About Me</a>
         <a href="/HearClear/comments" class="btn btn-outline-primary">Comments</a>
     </div>
@@ -14,19 +15,16 @@
     <table class="table">
         <thead class="thead-inverse">
             <tr>
-                <th> Name of Songs </th>
-                <th> Type of Songs </th>
+                <th> Title </th>
+                <th> File </th>
             <tr>
         <thead>
         
         <tbody>
-            {% for page in pages %}
+            {% for songfile in songs %}
                 <tr>
-                    <td>
-                        <a href="{% url 'aboutme' % page.pk}">{{page.name}} </a>
-                        <small class="text-muted d-block">{{page.description}}</small>
-                    </td>
-                    <td>mp3</td>
+                    <td> {{ songfile.title }} </td>
+                    <td> {{ songfile.filetype }}</td>
                 </tr>
             {% endfor %}
         </tbody>

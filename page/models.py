@@ -15,3 +15,10 @@ class Type(models.Model):
 
     def __str__(self):
         return self.type
+
+class SongFile(models.Model):
+    title = models.CharField(max_length = 100)
+    filetype = models.FileField(upload_to= 'songs/filetype/')
+
+    def __str__(self):
+        return self.title

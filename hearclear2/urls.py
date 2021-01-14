@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from page import views
 from accounts import views as accounts_views
@@ -23,6 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('HearClear', views.home, name='home'),
     path('HearClear/aboutme', views.aboutme),
-    path('HearClear/comments', views.comments),
+    path('HearClear/comments', views.comments, name='comments'),
+    path('HearClear/upload', views.upload, name = 'upload'),
     path('signup', accounts_views.signup, name='signup'),
+    path('HearClear/comments/reply', views.reply, name='reply'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
