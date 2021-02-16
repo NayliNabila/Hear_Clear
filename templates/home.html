@@ -10,6 +10,13 @@
         <a href="/HearClear/upload" class="btn btn-outline-primary">Upload</a>
         <a href="/HearClear/aboutme" class="btn btn-outline-primary">About Me</a>
         <a href="/HearClear/comments" class="btn btn-outline-primary">Comments</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn btn-outline-primary">Log Out</a> 
+        <strong> You're log in as {{ user.username }}</strong>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-primary">Log In</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-primary">Sign Up</a>
+        {% endif %}
     </div>
 
     <table class="table">
@@ -17,6 +24,7 @@
             <tr>
                 <th> Title </th>
                 <th> File </th>
+                <th> Size </th>
             <tr>
         <thead>
         
@@ -25,6 +33,7 @@
                 <tr>
                     <td> {{ songfile.title }} </td>
                     <td> {{ songfile.filetype }}</td>
+                    <td> {{ songfile.ext }}</td>
                 </tr>
             {% endfor %}
         </tbody>
