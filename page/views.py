@@ -27,7 +27,7 @@ def reply(request):
 
 def upload (request):
     if request.method =='POST':
-        form = SongForm(request.POST, request.FILES)
+        form = SongForm(request.POST, request.FILES, pk=song_id)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -36,3 +36,6 @@ def upload (request):
         return render(request, 'upload.html', {
         'form' : form
     })
+
+def songs (request):
+    return render(request, 'songs.html')

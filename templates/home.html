@@ -11,7 +11,9 @@
         <a href="/HearClear/aboutme" class="btn btn-outline-primary">About Me</a>
         <a href="/HearClear/comments" class="btn btn-outline-primary">Comments</a>
         {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="btn btn-outline-primary">Log Out</a> 
+        {# <a href="{% url 'secret' %}" class="btn btn-outline-primary">Secret page</a>#}
+        <a href="{% url 'password_change' %}" class="btn btn-outline-primary">Change password</a> 
+        <a href="{% url 'logout' %}" class="btn btn-outline-primary">Log Out</a>
         <strong> You're log in as {{ user.username }}</strong>
         {% else %}
         <a href="{% url 'login' %}" class="btn btn-outline-primary">Log In</a>

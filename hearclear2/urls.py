@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -30,6 +31,9 @@ urlpatterns = [
     path('HearClear/upload', views.upload, name = 'upload'),
     path('signup', accounts_views.signup, name='signup'),
     path('HearClear/comments/reply', views.reply, name='reply'),
+    #path('HearClear/<str:song_id>/', views.songs, name='songs'),
+    #path('secret/', accounts_views.secret_page, name = 'secret'),
+    #url(r'^songs/(?P<filter_by>[a-zA_Z]+)/$', views.upload, name='songs'),
 ]
 
 if settings.DEBUG:
