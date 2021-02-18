@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 from page import views
 from accounts import views as accounts_views
+#from page import songinfo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,6 +32,8 @@ urlpatterns = [
     path('HearClear/upload', views.upload, name = 'upload'),
     path('signup', accounts_views.signup, name='signup'),
     path('HearClear/comments/reply', views.reply, name='reply'),
+    url(r'^songfile/(?P<pk>\d+)/$', views.songdetails, name='songdetails'),
+    path('HearClear/info', views.result, name='info'),
     #path('HearClear/<str:song_id>/', views.songs, name='songs'),
     #path('secret/', accounts_views.secret_page, name = 'secret'),
     #url(r'^songs/(?P<filter_by>[a-zA_Z]+)/$', views.upload, name='songs'),

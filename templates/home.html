@@ -25,7 +25,7 @@
         <thead class="thead-inverse">
             <tr>
                 <th> Title </th>
-                <th> File </th>
+                {#<th> File </th>#}
                 <th> Size </th>
             <tr>
         <thead>
@@ -33,8 +33,8 @@
         <tbody>
             {% for songfile in songs %}
                 <tr>
-                    <td> {{ songfile.title }} </td>
-                    <td> {{ songfile.filetype }}</td>
+                    <td> <a href="{% url 'songdetails' songfile.pk %}">{{ songfile.title }} </a>  </td>
+                    {#<td> {{ songfile.filetype }}</td>#}
                     <td> {{ songfile.ext }}</td>
                 </tr>
             {% endfor %}

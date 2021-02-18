@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 #import librosa
 
 # Create your models here.
@@ -20,10 +21,23 @@ class Type(models.Model):
 class SongFile(models.Model):
     title = models.CharField(max_length = 100)
     filetype = models.FileField(upload_to= 'songs/filetype/')
+    date = models.DateTimeField(default=timezone.now)
+    duration = models.CharField(max_length=10)
+    samp_freq = models.DecimalField(null=True,max_digits=5,decimal_places=2)
+    
 
     def __str__(self):
         return self.title
+
+"""class SongData(models.Model):
+    titlee = models.CharField(max_length = 100)
+    filetypee = models.FileField(upload_to= 'songs/filetype/')
+    duration = models.CharField(max_length=10)
+    samp_freq = models.DecimalField(null=True,max_digits=5,decimal_places=2)
     
+    def __str__(self):
+        return self.titlee"""
+
     #fileduration=librosa.get_duration(filename=self.title)
     #print (fileduration)
 
