@@ -6,7 +6,24 @@ from django.core.files.storage import FileSystemStorage
 
 from .form import SongForm
 from .models import SongFile
-from .songinfo import SongInfo
+from django.db import models
+#from .models import ModelWithFileField
+#from .songinfo import SongInfo
+from django.views.generic import DetailView
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from django.core.files.images import ImageFile
+import numpy as np
+from io import BytesIO
+import librosa 
+import librosa.display
+from django.core.files.storage import FileSystemStorage
+import sys
+import datetime
+import os
+from glob import glob
 
 # Create your views here.
 def home (request):
@@ -15,15 +32,57 @@ def home (request):
         'songs' : songs
     })
 
+
+def testing (request):
+    #songfile = get_object_or_404(SongFile, pk=pk)
+    #path = SongFile.objects.get(filetype)
+    dir_image = "./media/audioimage"
+    dir_sound = "./media/songs"
+    audio_files = glob (dir_sound + "/*.wav")
+    #sound =  os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media/song/')
+    audio, sr = librosa.load(audio_files[1])
+    #time = np.arrange(0, len(audio))/sr
+    fig, ax = plt.subplots(1)
+    ax.set(title='Monophonic')
+    ax.label_outer()
+    librosa.display.waveplot(audio, sr=sr, ax=ax)
+    plt.show()
+    plt.savefig(dir_image + "/*.png")
+    return render (request, 'testing.html')
+
 def songdetails (request, pk):
     songfile = get_object_or_404(SongFile, pk=pk)
-    SongInfoResult = SongInfo ()
-    return render (request, 'songdetails.html', {'songfile' : songfile})
+    #path = SongFile.objects.get(filetype)
+    #songtitle = request.FileField
+    dir_image = "./media/audioimage"
+    dir_sound = "./media/songs" + songfile.audio
+    #songtitle = ModelWithFileField(file_field=request.FILES['file'])
+    #audio_files = glob (dir_sound + "/*.wav")
+    audio_files = glob (dir_sound + ".png")
+    audio, sr = librosa.load(audio_files)
+    #time = np.arrange(0, len(audio))/sr
+    fig, ax = plt.subplots(1)
+    ax.set(title='Monophonic')
+    ax.label_outer()
+    librosa.display.waveplot(audio, sr=sr, ax=ax)
+    plt.show()
+    plt.savefig(dir_image + "/image.png")
+    return render (request, 'songfile-detail.html', { 'songfile' : songfile})
 
-def result (self):
-    #self.songfile = song
-    SongInfoResult = SongInfo ()
-    return render (request, 'songdetails.html')
+"""class SongFileDetailView (DetailView):
+    model = SongFile
+    template_name = 'songfile-detail.html'
+    fields = ['title','audio']
+
+    def form_valid(self, form):
+
+        Song = SongInfo(form.instance.audio)
+        form.instance.image = Song[0]
+        form.instance.duration = Song[1]
+        form.instance.samp_freq = Song[2]
+        
+        return super().form_valid(form)"""
+
 
 def aboutme (request):
     return render(request, 'aboutme.html')

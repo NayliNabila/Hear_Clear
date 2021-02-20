@@ -27,15 +27,17 @@
                 <th> Title </th>
                 {#<th> File </th>#}
                 <th> Size </th>
+                <th> Date </th>
             <tr>
         <thead>
         
         <tbody>
             {% for songfile in songs %}
                 <tr>
-                    <td> <a href="{% url 'songdetails' songfile.pk %}">{{ songfile.title }} </a>  </td>
+                    <td> <a href="{% url 'song-detail' songfile.pk %}">{{ songfile.title }} </a>  </td>
                     {#<td> {{ songfile.filetype }}</td>#}
                     <td> {{ songfile.ext }}</td>
+                    <td> {{ songfile.date }}</td>
                 </tr>
             {% endfor %}
         </tbody>

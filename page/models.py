@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.urls import reverse
 #import librosa
 
 # Create your models here.
@@ -20,7 +21,8 @@ class Type(models.Model):
 
 class SongFile(models.Model):
     title = models.CharField(max_length = 100)
-    filetype = models.FileField(upload_to= 'songs/filetype/')
+    audio = models.FileField(upload_to= 'songs')
+    image = models.ImageField(upload_to='audioimage')
     date = models.DateTimeField(default=timezone.now)
     duration = models.CharField(max_length=10)
     samp_freq = models.DecimalField(null=True,max_digits=5,decimal_places=2)
@@ -28,6 +30,9 @@ class SongFile(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('songfile-detail', kwargs={'pk': self.pk})
 
 """class SongData(models.Model):
     titlee = models.CharField(max_length = 100)
