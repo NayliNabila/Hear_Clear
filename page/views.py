@@ -11,20 +11,6 @@ from django.db import models
 #from .songinfo import SongInfo
 from django.views.generic import DetailView
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-from django.core.files.images import ImageFile
-import numpy as np
-from io import BytesIO
-import librosa 
-import librosa.display
-from django.core.files.storage import FileSystemStorage
-import sys
-import datetime
-import os
-from glob import glob
-
 # Create your views here.
 def home (request):
     songs = SongFile.objects.all()
@@ -52,21 +38,6 @@ def testing (request):
 
 def songdetails (request, pk):
     songfile = get_object_or_404(SongFile, pk=pk)
-    #path = SongFile.objects.get(filetype)
-    #songtitle = request.FileField
-    dir_image = "./media/audioimage"
-    dir_sound = "./media/songs" + songfile.audio
-    #songtitle = ModelWithFileField(file_field=request.FILES['file'])
-    #audio_files = glob (dir_sound + "/*.wav")
-    audio_files = glob (dir_sound + ".png")
-    audio, sr = librosa.load(audio_files)
-    #time = np.arrange(0, len(audio))/sr
-    fig, ax = plt.subplots(1)
-    ax.set(title='Monophonic')
-    ax.label_outer()
-    librosa.display.waveplot(audio, sr=sr, ax=ax)
-    plt.show()
-    plt.savefig(dir_image + "/image.png")
     return render (request, 'songfile-detail.html', { 'songfile' : songfile})
 
 """class SongFileDetailView (DetailView):

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ object.title }}
+    {{ songfile.title }}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -10,14 +10,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>{{object.title}}</h2>
+    <h2>{{songfile.title}}</h2>
     <link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
 
-    <img src="{{ object.image.url }}" width="400" height="379">
+    <img src="{{ songfile.image.url }}" width="400" height="379">
 
     <div class="container-audio">
         <audio controls  loop autoplay>
-                   <source src="{{ object.audio.url }}" type="audio/wav">
+                   <source src="{{ songfile.audio.url }}" type="audio/wav">
                    Your browser dose not Support the audio Tag
                </audio>
 
