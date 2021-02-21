@@ -30,7 +30,7 @@ class Type(models.Model):
 class SongFile(models.Model):
     title = models.CharField(max_length = 100)
     audio = models.FileField(upload_to= 'songs')
-    image = models.ImageField(default='./audioimage/', upload_to='audioimage/image')
+    image = models.ImageField(upload_to='audioimage/image')
     date = models.DateTimeField(default=timezone.now)
     duration = models.CharField(max_length=10)
     samp_freq = models.DecimalField(null=True,max_digits=5,decimal_places=2)
@@ -53,12 +53,12 @@ class SongFile(models.Model):
         ax.label_outer()
         librosa.display.waveplot(audio, sr=sr, ax=ax)
         plt.show()
-        #plt.savefig(imagePath)
-        self.image.path = plt.savefig(self.image.path + str(timezone.now()) + ".png")
+        plt.savefig(imagePath)
+        #self.image.path = plt.savefig(self.image.path + str(timezone.now()) + ".png")
         #self.image = y
         #super(SongFile,self).save(self.image.path)
         #self.image.save(image)
-        #self.image.path = imagePath
+        self.image = (imagePath)
         #img=Image.open(self.image.path)
         #img.save(self.image.path)
         #return self.image.url
