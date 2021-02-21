@@ -19,7 +19,14 @@
         <audio controls  loop autoplay>
                    <source src="{{ songfile.audio.url }}" type="audio/wav">
                    Your browser dose not Support the audio Tag
-               </audio>
-
+        
+        </audio>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+            <td> {{ songfile.duration }}</td>
+            </tr>
+        </table>
+        
     
 {% endblock %}

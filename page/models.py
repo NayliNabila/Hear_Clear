@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.urls import reverse
+from django.core.files.images import ImageFile
 
 import librosa 
 import librosa.display
@@ -54,11 +55,14 @@ class SongFile(models.Model):
         librosa.display.waveplot(audio, sr=sr, ax=ax)
         plt.show()
         plt.savefig(imagePath)
+        self.image = ImageFile(open(imagePath, 'rb'))
+        self.duration = librosa.get_duration(y=audio,sr=sr)
+        super(SongFile,self).save(*args, **kwargs)
         #self.image.path = plt.savefig(self.image.path + str(timezone.now()) + ".png")
         #self.image = y
         #super(SongFile,self).save(self.image.path)
         #self.image.save(image)
-        self.image = (imagePath)
+        #self.image = (imagePath)
         #img=Image.open(self.image.path)
         #img.save(self.image.path)
         #return self.image.url
