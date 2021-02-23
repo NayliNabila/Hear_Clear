@@ -44,48 +44,6 @@ class SongFile(models.Model):
         return reverse('songfile-detail', kwargs={'pk': self.pk})
 
     def save (self, *args, **kwargs):
-        if request.files:
-            audio = request.files['inputFile']
-            audio_filename = request.form["filename"]
-            filename = secure_filename(audio_filename)
-            user = secure_filename(request.form["username"])
-            audio.save(os.path.join("" + user + "_" + filename))
-            image_name = filename.split('.')
-            image = "" + user + "_" + image_name[0] + ".png"
-            image_path = "" + user + "_" + image_name[0] + ".png"
-            audio_path = "" + user + "_" + filename
-            file = "" + user + "_" + filename 
-            plt.clf()
-            signal, sr = librosa.load(file)
-            plt.figure(figsize=(10,10))
-            plt.subplot(211)
-            librosa.display.waveplot(signal,sr)
-            plt.title('Waveform and Spectogram') # waveform of %r % file for title
-            plt.ylabel("Amplitude")
-            X = librosa.stft(signal)
-            Xdb = librosa.amplitude_to_db(abs(X))
-            plt.subplot(212)
-            librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
-            plt.show()
-            plt.savefig(image)
-            
-            duration = librosa.get_duration(y=signal,sr=sr)
-            file_size_byte = os.path.getsize(file)
-            file_size = file_size_byte/1024
-          
-            new_sound = Sounds( data=audio.read(), title=filename, username=request.form["username"], location=request.form["location"], sound_path=audio_path, waveform_path=image_path, file_type=image_name[1], file_duration=duration, file_size=file_size, sampling_freq=sr)
-             
-            try:
-                db.session.add(new_sound)
-                db.session.commit()
-                return redirect ('/confirm')
-
-            except:
-                return "There was an error"
-
-        else:
-            return render_template("upload.html")
-        
         super(SongFile,self).save(*args, **kwargs)
         dir_image = "./media/audioimage/image"
         imagePath = dir_image + str(timezone.now()) + ".png"
