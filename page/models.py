@@ -57,6 +57,10 @@ class SongFile(models.Model):
         plt.savefig(imagePath)
         self.image = ImageFile(open(imagePath, 'rb'))
         self.duration = librosa.get_duration(y=audio,sr=sr)
+        
+        file_size_byte = os.path.getsize(file)
+        file_size = file_size_byte/1024
+                
         super(SongFile,self).save(*args, **kwargs)
         #self.image.path = plt.savefig(self.image.path + str(timezone.now()) + ".png")
         #self.image = y
