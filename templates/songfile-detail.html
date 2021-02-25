@@ -72,3 +72,68 @@
 </div>
 
 {% endblock %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+table {
+  width:100%;
+}
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+table, th, td {
+  padding: 15px;
+  text-align: left;
+}
+table, td {
+  padding: 15px;
+  text-align: middle;
+}
+#t01 tr:nth-child(even) {
+  background-color:#800080;
+  color:white;
+}
+#t01 tr:nth-child(odd) {
+ background-color:#D8BFD8;
+ color:black;
+}
+</style>
+</head>
+<body>
+
+<h1 style="text-align:middle"> Audio File Report </h1>
+
+<table id="t01">
+  <tr>
+    <th>User Name</th>
+    <td>Nabil</td>
+  </tr>
+  <tr>
+    <th>Location</th>
+    <td>Kota Bharu, Kelantan</td>
+  </tr>
+  <tr>
+    <th>Length (seconds)</th>
+    <td>20</td> 
+  </tr>
+  <tr>
+    <th>File Size (kB)</th>
+    <td>2589</td>
+  </tr>
+  <tr>
+    <th>File Type</th>
+    <td>mp3</td>
+  </tr>
+  <tr>
+    <th>Sampling Frequency (Hz)</th>
+    <td>35421</td>
+  </tr>
+
+</table>
+
+</body>
+</html>
